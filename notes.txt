@@ -1,0 +1,6 @@
+File content needs to use utf8 without BOM
+
+See 
+	https://github.com/mojombo/jekyll/wiki
+	http://ruhoh.com/
+	http://ivanzuzak.info/2011/01/02/enabling-pubsubhubbub-for-github-hosted-blogs.html
