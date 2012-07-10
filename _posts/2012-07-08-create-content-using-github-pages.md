@@ -5,7 +5,7 @@ title: Create content using github pages
   
 ## Creating the github pages repository
 Create a public repository on github and name as pmcgrath.github.com where pmcgrath is the github account name  
-Clone the project locally using the appropriate github url (ssh or https)  
+Clone the project locally using the appropriate github url  
 i.e. git clone git@github.com:pmcgrath/pmcgrath.github.com.git  
   
 ## Set up repository directory content skeleton
@@ -17,7 +17,7 @@ mkdir \_layouts
 mkdir \_posts  
   
 ## Basic content
-Create the following fields ensuring they do not include a BOM if utf8
+Create the following files ensuring they do not include a BOM if utf8
 * \_config.yml
 * index.html
 * \_layouts\default.html
