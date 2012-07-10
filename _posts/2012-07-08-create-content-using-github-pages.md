@@ -8,7 +8,6 @@ Create a public repository on github and name as pmcgrath.github.com where pmcgr
 Clone the project locally using the appropriate github url (ssh or https)  
 i.e. git clone git@github.com:pmcgrath/pmcgrath.github.com.git  
   
-  
 ## Set up repository directory content skeleton
 cd pmcgrath.github.com.git  
 mkdir assets  
@@ -16,7 +15,6 @@ mkdir assets\css
 mkdir assets\images  
 mkdir \_layouts  
 mkdir \_posts  
-  
   
 ## Basic content
 Create the following fields ensuring they do not include a BOM if utf8
