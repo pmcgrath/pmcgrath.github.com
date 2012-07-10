@@ -2,7 +2,7 @@
 layout: post
 title: Create content using github pages
 ---
- 
+
 ## Creating the github pages repository
 Create a public repository on github and name as pmcgrath.github.com where pmcgrath is the github account name
 Clone the project locally using the appropriate github url (ssh or https)
