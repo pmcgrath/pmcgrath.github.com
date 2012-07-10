@@ -17,7 +17,8 @@ mkdir \_layouts
 mkdir \_posts  
   
 ## Basic content
-Create the following files ensuring they do not include a BOM if utf8
+Create the following files ensuring they do not include a BOM if utf8 encoded
 * \_config.yml
 * index.html
 * \_layouts\default.html
+
