@@ -23,7 +23,7 @@ Create the following files
 * \_layouts\default.html
 
 ## Notes
-No tabs allowed in the _config.yml file as indicated @ https://github.com/mojombo/jekyll/wiki/Configuration  
+No tabs allowed in the \_config.yml file as indicated @ https://github.com/mojombo/jekyll/wiki/Configuration  
 Make sure files comming from windows are ansi to make life easier, if utf-8 encoding files need to make sure there is no BOM as indicated @ https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter or else the build will fail and you will not see updates after a push  
 Markdown see http://daringfireball.net/projects/markdown/  
   Need 2 trailing spaces for new lines  
