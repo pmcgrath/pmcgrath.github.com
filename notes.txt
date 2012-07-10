@@ -6,3 +6,4 @@ See
   ? - http://ivanzuzak.info/2011/01/02/enabling-pubsubhubbub-for-github-hosted-blogs.html
   code highlighting js helper - http://craig.is/making/rainbows/
   blog sample info - http://erjjones.github.com/blog/How-I-built-my-blog-in-one-day/
+  markdown - http://daringfireball.net/projects/markdown/
