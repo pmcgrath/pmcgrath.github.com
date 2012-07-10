@@ -19,6 +19,6 @@ mkdir _posts
 
 ## Basic content
 Create the following fields ensuring they do not include a BOM if utf8
-* _config.yml
+* config.yml
 * index.html
-* _layouts\default.html
+* layouts\default.html
