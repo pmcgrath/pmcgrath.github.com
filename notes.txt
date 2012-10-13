@@ -7,3 +7,4 @@ See
   code highlighting js helper - http://craig.is/making/rainbows/
   blog sample info - http://erjjones.github.com/blog/How-I-built-my-blog-in-one-day/
   markdown - http://daringfireball.net/projects/markdown/
+  http://stationinthemetro.com/storage/dev/Markdown_Cheat_Sheet_v1-1.pdf
