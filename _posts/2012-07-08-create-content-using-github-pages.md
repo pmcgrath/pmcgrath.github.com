@@ -28,3 +28,4 @@ Create the following files
 * Markdown see http://daringfireball.net/projects/markdown/  
   * Need 2 trailing spaces for new lines  
   * Need to escape some chars such as \_ see http://daringfireball.net/projects/markdown/syntax#backslash
+  * To include script i had to use an opening and closing tag on different lines, not sure why but could not create gist links without doing so
