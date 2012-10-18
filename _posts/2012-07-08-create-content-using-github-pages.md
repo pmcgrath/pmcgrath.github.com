@@ -29,6 +29,4 @@ Create the following files
   * Need 2 trailing spaces for new lines  
   * Need to escape some chars such as \_ see http://daringfireball.net/projects/markdown/syntax#backslash
   * To include script i had to use an opening and closing tag on different lines, not sure why but could not create gist links without doing so
-
-
-
+* Using amazon s3 instead http://vvv.tobiassjosten.net/development/jekyll-blog-on-amazon-s3-and-cloudfront/
