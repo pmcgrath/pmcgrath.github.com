@@ -27,6 +27,7 @@ Create the following files
 * Make sure files comming from windows are ansi to make life easier, if utf-8 encoding files need to make sure there is no BOM as indicated @ https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter or else the build will fail and you will not see updates after a push  
 * Markdown see http://daringfireball.net/projects/markdown/  
   * Need 2 trailing spaces for new lines  
+  * For code we need to use backticks at the start and end of each line of text  
   * Need to escape some chars such as \_ see http://daringfireball.net/projects/markdown/syntax#backslash
   * To include script i had to use an opening and closing tag on different lines, not sure why but could not create gist links without doing so
 * Using amazon s3 instead http://vvv.tobiassjosten.net/development/jekyll-blog-on-amazon-s3-and-cloudfront/
