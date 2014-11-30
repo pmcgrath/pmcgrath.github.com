@@ -2,21 +2,20 @@
 layout: post
 title: Create content using github pages
 ---
-  
+
 ## Creating the github pages repository
-Create a public repository on github and name as pmcgrath.github.com where pmcgrath is the github account name  
+Create a public repository on github and name as pmcgrath.github.com where pmcgrath is the github account name.  
 Clone the project locally using the appropriate github url  
-i.e. git clone git@github.com:pmcgrath/pmcgrath.github.com.git  
-  
+i.e. git clone git@github.com:pmcgrath/pmcgrath.github.com.git
+
 
 ## Set up repository directory content skeleton
-```
-cd pmcgrath.github.com.git
-mkdir assets
-mkdir assets\css
-mkdir assets\image 
-mkdir \_layouts
-mkdir \_posts
+```bash
+ mkdir assets
+ mkdir assets\css
+ mkdir assets\image 
+ mkdir \_layouts
+ mkdir \_posts
 ```
 
 

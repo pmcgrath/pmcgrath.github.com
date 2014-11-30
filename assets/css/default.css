@@ -1,31 +1,12 @@
-* { margin: 0; padding: 0; }
-
-
-html, body {
-  height: 100%;
-}
-
 body {
-  background-color: white;
-  font-family: verdana; 
+	background-color: white;
+	font-family: courier; 
 }
 
-h1 {
-  margin-bottom: 1em;
+a.home {
+	text-decoration: none;
 }
 
-p {
-  margin: 1em 0;
-}
-
-a {
-  color: #00a;
-}
-
-a:hover {
-  color: black;
-}
-
-a:visited {
-  color: #a0a;
+div.content {
+	width:800px;
 }

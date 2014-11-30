@@ -10,7 +10,7 @@ fi
 
 id | grep '(docker)' > /dev/null
 if [ $? != 0 ]; then
-	echo You are not a member of the local docker group, you must run this script with elevated privileges i.e sudo $0 
+	echo You are not a member of the local docker group, you must run this script with elevated privileges i.e sudo $0
 	exit 2 
 fi
 
