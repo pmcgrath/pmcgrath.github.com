@@ -54,15 +54,9 @@ docker run -it --name github-pages --rm -v `pwd`:/src github-pages ruby -S jekyl
 ```
 - Edit the settings in the _config.yml file, changing the values appropriately
 - Use [redcarpet](http://stackoverflow.com/questions/13464590/github-flavored-markdown-and-pygments-highlighting-in-jekyll$) markdown engine so we can use fenced code blocks, add the following to the _config.yml file
-
-```
-markdown: redcarpet             # So we can use fences code blocks
-```
+  * markdown: redcarpet             # So we can use fences code blocks
 - Use permalinks for the links, so we just use the title for the urls, add the following to the _config.yml file
-
-```
-permalink: /:title              # So title alone is used for the link
-```
+  * permalink: /:title              # So title alone is used for the link
 
 
 ## Create blog posts
