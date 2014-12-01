@@ -14,4 +14,4 @@ EXPOSE	4000
 
 USER	blogger
 
-ENTRYPOINT [ "ruby", "-S", "jekyll", "serve", "--host=0.0.0.0", "--watch", "--force_polling" ]
+CMD [ "ruby", "-S", "jekyll", "serve", "--host=0.0.0.0", "--watch", "--force_polling" ]
