@@ -1,38 +1,86 @@
 ---
 layout: post
-title: Create content using github pages
+title:  "Create content using github pages"
+categories: jekyll github 
 ---
 
-## Creating the github pages repository
-Create a public repository on github and name as pmcgrath.github.com where pmcgrath is the github account name.  
-Clone the project locally using the appropriate github url  
-i.e. git clone git@github.com:pmcgrath/pmcgrath.github.com.git
+
+## Purpose
+Create a website with static content using markdown
 
 
-## Set up repository directory content skeleton
+## Required software
+See [github_pages](https://pages.github.com/), you will need the following
+
+- [Ruby](https://www.ruby-lang.org/en/)
+- [Jekyll and other gems](https://help.github.com/articles/using-jekyll-with-pages/)
+- [therubyracer javascript gem](https://github.com/jekyll/jekyll/issues/2327)
+
+Rather than having this software on my local machine I will use a [docker](https://www.docker.com/) container
+
+
+## Workflow
+- Create a github repository named pmcgrath.github.com (pmcgrath.github.io for newer accounts)
+- Clone github repository
+- Initialise jekyll content, see below
+- Run docker container serving jekyll content
+- Run the following in a loop until you are happy with the content
+  * Edit content locally
+  * View content in browser @ http://localhost:4000/
+- Push content to github
+
+
+## Docker usage
+- I have a docker image so that I can create and edit content locally and view it before I push to github
+- I do not need any of the required software on my local machine
+- To build an image you will need a Dockerfile and a Gemfile (See https://github.com/pmcgrath/pmcgrath.github.com)
+- To build the image run the following bash command (Will need sudo prefix if user is not in the docker group)
+
 ```bash
- mkdir assets
- mkdir assets\css
- mkdir assets\image 
- mkdir \_layouts
- mkdir \_posts
+docker build -t github-pages .
+```
+- To Run an instance of the docker image which watches for changes while editing, run an instance using
+
+```bash
+docker run -it --name github-pages --rm -v `pwd`:/src github-pages
 ```
 
 
-## Basic files
-Create the following files
-- \_config.yml
-- index.html
-- \_layouts\default.html
+## Initialise jekyll content
+- Use the following bash command within the empty cloned repository to create the initial content
+
+```bash
+docker run -it --name github-pages --rm -v `pwd`:/src github-pages ruby -S jekyll new .
+```
+- Edit the settings in the _config.yml file, changing the values appropriately
+- Use [redcarpet](http://stackoverflow.com/questions/13464590/github-flavored-markdown-and-pygments-highlighting-in-jekyll$) markdown engine so we can use fenced code blocks, add the following to the _config.yml file
+
+```
+markdown: redcarpet             # So we can use fences code blocks
+```
+- Use permalinks for the links, so we just use the title for the urls, add the following to the _config.yml file
+
+```
+permalink: /:title              # So title alone is used for the link
+```
+
+
+## Create blog posts
+- Add a file to the _posts directory, you can copy the default post created when the jekyll content was initialised
+
+
+## Jekyll notes
+- Converts mardown content to static html content
+- Places the static version in the _site directory, can do so manually using the build command
+- Can serve content by running a web server listening on port 4000
+- Can be instructed to watch for content changes, which will result in re-generating the static content
+- Changes to the _config.yml will require restarting the container
 
 
 ## Notes
-- Can use [dillinger](http://dillinger.io/) toedit markdown in the browser
-- No tabs allowed in the \_config.yml file as indicated @ https://github.com/mojombo/jekyll/wiki/Configuration
-- Make sure files comming from windows are ansi to make life easier, if utf-8 encoding files need to make sure there is no BOM as indicated @ https://github.com/mojombo/jekyll/wiki/YAML-Front-Matter or else the build will fail and you will not see updates after a push
-- Markdown see http://daringfireball.net/projects/markdown/
-  * Need 2 trailing spaces for new lines
-  * For code we need to use backticks at the start and end of each line of text
-  * Need to escape some chars such as \_ see http://daringfireball.net/projects/markdown/syntax#backslash
-  * To include script i had to use an opening and closing tag on different lines, not sure why but could not create gist links without doing so
-- Using amazon s3 instead http://vvv.tobiassjosten.net/development/jekyll-blog-on-amazon-s3-and-cloudfront/
+- Using [Jekyll](http://jekyllrb.com/) to generate the content
+- [Markdown](http://daringfireball.net/projects/markdown/)
+- Using [Github flavoured markdown](https://help.github.com/articles/github-flavored-markdown/)
+- Can use [dillinger](http://dillinger.io/) to edit markdown in the browser
+- Can do so with Amazon S3 also, see [here](http://vvv.tobiassjosten.net/development/jekyll-blog-on-amazon-s3-and-cloudfront/)
+
