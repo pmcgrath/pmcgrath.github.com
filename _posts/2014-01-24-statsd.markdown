@@ -1,6 +1,7 @@
 ---
 layout: post
 title: StatsD
+categories: statsd graphite statistics monitoring 
 ---
 
 
