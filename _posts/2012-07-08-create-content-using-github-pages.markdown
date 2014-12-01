@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Create content using github pages"
-categories: jekyll github 
+title:  Create content using github pages
+categories: jekyll github markdown docker
 ---
 
 
