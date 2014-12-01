@@ -13,8 +13,8 @@ Create a website with static content using markdown
 See [github_pages](https://pages.github.com/), you will need the following
 
 - [Ruby](https://www.ruby-lang.org/en/)
-- [Jekyll and other gems](https://help.github.com/articles/using-jekyll-with-pages/)
-- [therubyracer javascript gem](https://github.com/jekyll/jekyll/issues/2327)
+- [Jekyll](https://help.github.com/articles/using-jekyll-with-pages/) and other gems
+- [therubyracer](https://github.com/jekyll/jekyll/issues/2327) javascript environment gem
 
 Rather than having this software on my local machine I will use a [docker](https://www.docker.com/) container
 
