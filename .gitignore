@@ -1,3 +1,6 @@
 # Generated site content
 _site
 .sass-cache
+
+# Temp vim files
+*.swp
