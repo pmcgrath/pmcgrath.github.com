@@ -1,2 +1,3 @@
 # Generated site content
-_site/
+_site
+.sass-cache
