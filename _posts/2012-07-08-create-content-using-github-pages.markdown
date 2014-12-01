@@ -33,7 +33,10 @@ Rather than having this software on my local machine I will use a [docker](https
 ## Docker usage
 - I have a docker image so that I can create and edit content locally and view it before I push to github
 - I do not need any of the required software on my local machine
-- To build an image you will need a Dockerfile and a Gemfile (See https://github.com/pmcgrath/pmcgrath.github.com)
+- To build an image you will need the following files
+  * [Dockerfile](https://raw.githubusercontent.com/pmcgrath/pmcgrath.github.com/master/Dockerfile)
+  * [Gemfile](https://raw.githubusercontent.com/pmcgrath/pmcgrath.github.com/master/Gemfile)
+  * [docker ignore](https://raw.githubusercontent.com/pmcgrath/pmcgrath.github.com/master/.dockerignore)
 - To build the image run the following bash command (Will need sudo prefix if user is not in the docker group)
 
 ```bash
