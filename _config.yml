@@ -11,6 +11,3 @@ github_username:  pmcgrath
 # Build settings
 markdown: redcarpet             # So we can use fences code blocks
 permalink: /:title              # So title alone is used for the link
-
-
-fenced_code_blocks: true

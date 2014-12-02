@@ -35,7 +35,7 @@ func main() {
 {%endraw%}
 ``` 
 
-you can 
+the issue is with the {%raw%}"His name is {{.Name}}\n"{%endraw%} parameter to the template's Parse method, you can
 
 - Surround the entire content with {{ "{%raw"}}%} and {{ "{%endraw"}}%} tags, less work 
 - Surround only the piece that causes the issue with {{ "{%raw"}}%} and {{ "{%endraw"}}%} tags
