@@ -4,6 +4,9 @@ title: Create content using github pages
 categories: jekyll github markdown docker
 ---
 
+## EDIT
+This content has been completely altered since this initial posting, this is current as of Dec 2014
+
 
 ## Purpose
 Create a website with static content using markdown
@@ -80,4 +83,4 @@ docker run -it --name github-pages --rm -v `pwd`:/src github-pages ruby -S jekyl
 - Using [Github flavoured markdown](https://help.github.com/articles/github-flavored-markdown/)
 - Can use [dillinger](http://dillinger.io/) to edit markdown in the browser
 - Can do so with Amazon S3 also, see [here](http://vvv.tobiassjosten.net/development/jekyll-blog-on-amazon-s3-and-cloudfront/)
-
+- [hugo](http://gohugo.io/) golang alternative
