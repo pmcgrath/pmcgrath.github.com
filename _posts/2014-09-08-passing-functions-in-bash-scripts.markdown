@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Passing functions in a bash script
+title: Passing functions in bash scripts
 categories: bash
 ---
 
