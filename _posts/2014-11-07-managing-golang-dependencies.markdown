@@ -34,3 +34,8 @@ categories: golang
 ## Building\Installing\Running
 - Use godep so you are in fact using the vendored versions rather then the cloned versions
 
+
+## Resources
+- http://blog.gopheracademy.com/advent-2014/deps/
+- http://nathany.com/go-packages/
+
