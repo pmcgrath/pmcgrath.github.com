@@ -74,9 +74,9 @@ ETCDCTL_PEERS=http://127.0.0.1:2379 $etcd_bin_dir/etcdctl member list
 
 
 ## Interacting with the cluster using etcdctl
-- Will use the client port 2379 based [on](http://www.iana.org/assignments/service-names-port-numbers)
+- Will use the client port 2379 based on [this](http://www.iana.org/assignments/service-names-port-numbers)
 - etcdctl defaults to 4001 at this time 
-- I could have added an extra client url for 4001 when bring up the nodes, but i'm guessing 4001 will be removed at some stage
+- I could have added an extra client url for 4001 when bring up the nodes, but I'm guessing 4001 will be removed at some stage
 
 ```bash
 # etcd bin directory
@@ -129,7 +129,7 @@ etcd_bin_dir=/home/pmcgrath/go/src/github.com/coreos/etcd/bin/
 
 # Run a read write proxy - on 8080 
 $etcd_bin_dir/etcd \
-	--proxy on \
+	-proxy on \
 	-name proxy \
 	-listen-client-urls http://localhost:8080 \
 	-initial-cluster node1=http://localhost:2380,node2=http://localhost:2381,node3=http://localhost:2382 &> /tmp/etcdinv/proxy.log &
