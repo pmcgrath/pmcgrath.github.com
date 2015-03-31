@@ -190,7 +190,7 @@ You can also see the documentation and source for functions within the repl as f
 
 
 ## Basic hello world web app
-Create new web app, this will create a library app that does not have a main entry function
+Create new app, this will create a library app that does not have a main entry function
 
 ```bash
 # Create new app
@@ -215,6 +215,8 @@ Alter the project.clj as follows
 - We have added an extra leiningen plugin lein-ring v0.8.13
 - We have added an extra ring attribute indicating the handler to use - this will be the entry point for the app.
 
+Ring is the Clojure equivalent of [Rack](http://rack.github.io/) for Ruby or [OWIN](http://owin.org/) for .NET.
+Ring provides a minimal interface between webservers and web application frameworks or implementations.
 
 Alter the src/helloweb/core.clj as follows
 
@@ -246,7 +248,7 @@ To see the http content open another terminal and run
 curl -v -w '\n' http://localhost:3000
 ```
 
-This is a very basic web app and there are much better tools for creating web apps\api applications.
+This is a very basic web app and there are much richer tools for creating web apps\api applications, such as [Compojure](https://github.com/weavejester/compojure) and [Luminus](http://www.luminusweb.net/).
 
 
 # Editors
