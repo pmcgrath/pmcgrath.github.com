@@ -62,7 +62,7 @@ cp clojure-1.6.0/clojure-1.6.0.jar .
 ```
 
 ### Start a REPL
-A REPL is a read eval print loop that allows interactive programming. Ruby is irb, erlang has erl etc.
+A REPL is a read eval print loop that allows interactive programming. Ruby has irb, erlang has erl etc.
 
 ```bash
 # Run java with clojure-1.6.0.jar in the classpath and execute clojure.main entry point
@@ -88,6 +88,7 @@ java -cp clojure-1.6.0.jar clojure.main app.clj
 [leiningen](http://leiningen.org/) seems to be the most popular way to manage Clojure code.
 The [tutorial](https://github.com/technomancy/leiningen/blob/stable/doc/TUTORIAL.md) details the functions and extensions that this tool provides.
 Some of the features you can use it for
+
 - Installing Clojure (Let it manage this rather than using the minimal Clojure usage described above)
 - Creating projects - Like scaffolding in other enviornments (Ruby on Rails, ASP.NET)
 - Directory layout standardisation
@@ -99,7 +100,7 @@ Some of the features you can use it for
 - Plugins (Like managing ClojureScript builds)
 
 ### Installation
-See [site](http://leiningen.org/)
+See the projet [site](http://leiningen.org/)
 
 ```bash
 # Create bin directory if it does not already exist
@@ -162,22 +163,28 @@ lein repl
 To run already defined functions within the same REPL
 
 ```clojure
+; Execute the -main function which is defined in the src/hello/core.clj file
 (-main)
 ```
 
 To run the test function that was created (This is a sample that is set to fail) within the same REPL
 
 ```clojure
+; Require namespaces
 (require 'clojure.test)
 (require 'hello.core-test)
+
+; Execute the run-tests function for the test namespace
 (clojure.test/run-tests 'hello.core-test)
 ```
-We required the namespaces so they are available to us and then executed the run-tests function for the test namespace
 
 You can also see the documentation and source for functions within the repl as follows
 
 ```clojure
+; Get the documentation for the map function
 (doc map)
+
+; Get the source for the map function
 (source map)
 ```
 
@@ -214,6 +221,7 @@ Alter the src/helloweb/core.clj as follows
 ```clojure
 (ns helloweb.core)
 
+; Single function that responds to all request as we have no routing configured
 (defn handler 
   [request]
   {:status 200
@@ -245,7 +253,7 @@ This is a very basic web app and there are much better tools for creating web ap
 I am currently using vim with no plugins but there are vim plugins for clojure and most people seem to be using emacs.
 
 
-# Test
+# Running tests
 You can run tests that are defined in the test directory using the following
 
 ```bash
