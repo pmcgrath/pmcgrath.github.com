@@ -9,5 +9,5 @@ twitter_username: p_mc_grath
 github_username:  pmcgrath
 
 # Build settings
-markdown: redcarpet             # So we can use fences code blocks
+markdown: redcarpet             # So we can use fenced code blocks
 permalink: /:title              # So title alone is used for the link
