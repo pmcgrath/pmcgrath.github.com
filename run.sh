@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-image_name=github-pages
+image_name=pmcgrath/github-pages:1.0
 container_name=github-pages
 
 which docker > /dev/null
@@ -14,12 +14,12 @@ if [ $? != 0 ]; then
 	exit 2 
 fi
 
-docker images $image_name | grep $image_name > /dev/null
-if [ $? != 0 ]; then
+docker_image_id=$(docker image ls $image_name -q)
+if [ -z "$docker_image_id" ]; then
 	echo You have not build the required docker image, can use the following
-	echo docker build -t $image_name .
+	echo docker image build -t $image_name .
 	exit 3 
 fi
 
 # Will run in interactive mode, could have used -d but this is usually short lived
-docker run -it --name $container_name --rm -v $(pwd):/src -p 4000:4000 $image_name
+docker container run --rm -it --name $container_name --volume $(pwd):/src -p 4000:4000 $image_name

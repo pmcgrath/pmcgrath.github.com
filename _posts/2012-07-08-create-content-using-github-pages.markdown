@@ -5,7 +5,7 @@ categories: jekyll github markdown docker
 ---
 
 ## EDIT
-This content has been completely altered since this initial posting, this is current as of Dec 2014
+This content has been completely altered since this initial posting, this is current as of Dec 2016
 
 
 ## Purpose
@@ -17,6 +17,7 @@ See [github_pages](https://pages.github.com/), you will need the following
 
 - [Ruby](https://www.ruby-lang.org/en/)
 - [Jekyll](https://help.github.com/articles/using-jekyll-with-pages/) and other gems
+- [Redcarpet](https://github.com/vmg/redcarpet)
 - [therubyracer](https://github.com/jekyll/jekyll/issues/2327) javascript environment gem
 
 Rather than having this software on my local machine I will use a [docker](https://www.docker.com/) container
@@ -43,12 +44,12 @@ Rather than having this software on my local machine I will use a [docker](https
 - To build the image run the following bash command (Will need sudo prefix if user is not in the docker group)
 
 ```bash
-docker build -t github-pages .
+docker image build -t pmcgrath/github-pages:1.0 .
 ```
 - To Run an instance of the docker image which watches for changes while editing, run an instance using
 
 ```bash
-docker run -it --name github-pages --rm -v `pwd`:/src github-pages
+docker container run --rm -it --name github-pages -p 4000:4000 --volume $(pwd):/src pmcgrath/github-pages:1.0
 ```
 
 
@@ -56,7 +57,7 @@ docker run -it --name github-pages --rm -v `pwd`:/src github-pages
 - Use the following bash command within the empty cloned repository to create the initial content
 
 ```bash
-docker run -it --name github-pages --rm -v `pwd`:/src github-pages ruby -S jekyll new .
+docker container run --rm -it --name github-pages --rm -v $(pwd):/src pmcgrath/github-pages:1.0 ruby -S jekyll new .
 ```
 - Edit the settings in the _config.yml file, changing the values appropriately
 - Use [redcarpet](http://stackoverflow.com/questions/13464590/github-flavored-markdown-and-pygments-highlighting-in-jekyll$) markdown engine so we can use fenced code blocks, add the following to the _config.yml file
