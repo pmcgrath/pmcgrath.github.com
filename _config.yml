@@ -10,4 +10,4 @@ github_username:  pmcgrath
 
 # Build settings
 markdown: redcarpet             # So we can use fenced code blocks
-permalink: /:title/             # So title alone is used for the link
+permalink: /:title              # So title alone is used for the link
