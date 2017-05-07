@@ -3,15 +3,15 @@ FROM 	ruby:latest
 # Create a user that matches local user, presuming the same ids (1000)
 RUN 	groupadd -g 1000 -r blogger \
 	&& useradd -u 1000 -r -g blogger blogger \
-	&& mkdir /src \
+	&& mkdir /blog \
 	&& chown blogger:blogger /src
 
-WORKDIR /src
+WORKDIR /blog
 COPY 	Gemfile Gemfile
-RUN 	bundle install
+RUN 	bundle install jekyll
 
 EXPOSE	4000
 
 USER	blogger
 
-CMD [ "ruby", "-S", "jekyll", "serve", "--host=0.0.0.0", "--watch", "--force_polling" ]
+CMD [ "bundler", "exec", "jekyll", "serve", "--host", "0.0.0.0", "--watch" ]

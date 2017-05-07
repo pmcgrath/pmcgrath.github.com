@@ -1,6 +1,6 @@
-# Generated site content
 _site
 .sass-cache
+.jekyll-metadata
 
 # Temp vim files
 *.swp
