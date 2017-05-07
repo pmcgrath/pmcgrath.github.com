@@ -4,14 +4,17 @@ FROM 	ruby:latest
 RUN 	groupadd -g 1000 -r blogger \
 	&& useradd -u 1000 -r -g blogger blogger \
 	&& mkdir /blog \
-	&& chown blogger:blogger /src
+	&& chown blogger:blogger /blog
+
+# Install jekyll
+RUN 	gem install jekyll
 
 WORKDIR /blog
-COPY 	Gemfile Gemfile
-RUN 	bundle install jekyll
+COPY	Gemfile .
+RUN	bundle install
 
 EXPOSE	4000
 
 USER	blogger
 
-CMD [ "bundler", "exec", "jekyll", "serve", "--host", "0.0.0.0", "--watch" ]
+CMD	[ "bundler", "exec", "jekyll", "serve", "--host", "0.0.0.0", "--watch" ]
