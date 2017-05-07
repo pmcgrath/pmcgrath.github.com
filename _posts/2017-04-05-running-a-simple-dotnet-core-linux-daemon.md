@@ -5,15 +5,15 @@ categories: dotnetcore
 ---
 
 ## Purpose
-Someone has asked me about running a dotnet Core service as a Linux daemon, so this is a very trivial example
+Someone has asked me about running a dotnet Core service as a Linux daemon, this is a very trivial example
 
-Running a ASP.NET service should be much the same, as the generated project's main method will include a blocking call on host.Run()
+Running a ASP.NET service should be much the same, as all project types result in console applications, so the generated project's main method will include a blocking call on host.Run()
 
 
 
 ## Environment
-Ubuntu 16.04 using [SystemD](https://www.freedesktop.org/wiki/Software/systemd/)
-Dotnet [Core](https://www.microsoft.com/net/download/linux) 1.1
+- Ubuntu 16.04 using [SystemD](https://www.freedesktop.org/wiki/Software/systemd/)
+- dotnet [Core](https://www.microsoft.com/net/download/linux) 1.1
 
 
 
@@ -144,5 +144,5 @@ systemctl --type service |& grep dnsvc
 ## Gracefull shutdown - Handling signals
 - The service should handle [signals](https://en.wikipedia.org/wiki/Unix_signal) like SIGTERM, SIGINT etc.
 - Would use this to do any cleanup just before exiting, like docker [stop](https://docs.docker.com/engine/reference/commandline/stop/) for containers
-- Current version of dotnet Core does handle this as far as I know
+- Current version of dotnet Core does NOT handle this as far as I know
 - You can follow this [issue](https://github.com/dotnet/coreclr/pull/4309), should hopefully be sorted in the near future
