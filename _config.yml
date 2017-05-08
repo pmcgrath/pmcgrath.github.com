@@ -7,6 +7,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://pmcgrath.github.io" # the base hostname & protocol for your site
 twitter_username: p_mc_grath
 github_username:  pmcgrath
+google-analytics: UA-58090606-1         # So the file _includes/google-analytics.html can include this as the tracking Id, See "Finishng tocuhes at https://ongspxm.github.io/blog/2016/09/jekyll-google-analytics/"
 
 # Build settings
 markdown: kramdown
@@ -16,4 +17,4 @@ gems:
 exclude:
   - Gemfile
   - Gemfile.lock
-permalink: /:title              # So title alone is used for the link
+permalink: /:title                      # So title alone is used for the link
