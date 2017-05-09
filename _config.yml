@@ -8,7 +8,7 @@ url: "https://pmcgrath.github.io" # the base hostname & protocol for your site
 twitter_username: p_mc_grath
 github_username:  pmcgrath
 # So the file _includes/google-analytics.html can include this as the tracking Id, See "Finishng tocuhes at https://ongspxm.github.io/blog/2016/09/jekyll-google-analytics/"
-google-analytics: UA-58090606-1
+google_analytics: UA-58090606-1
 
 # Build settings
 markdown: kramdown
