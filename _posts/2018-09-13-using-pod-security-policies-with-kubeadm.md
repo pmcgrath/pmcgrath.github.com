@@ -121,7 +121,7 @@ So none appear to be running, would normally see pods with some pending if we ha
 
 Lets check docker
 ```
-docker container ls --format "{{ .Names }}"
+docker container ls --format {%raw%}'{{ .Names }}'{%endraw%}
 
 k8s_kube-scheduler_kube-scheduler-pmcgrath-k8s-master_kube-system_a00c35e56ebd0bdfcd77d53674a5d2a1_0
 k8s_kube-controller-manager_kube-controller-manager-pmcgrath-k8s-master_kube-system_fd832ada507cef85e01885d1e1980c37_0
