@@ -9,15 +9,26 @@ Illustrate using [pod security policies](https://kubernetes.io/docs/concepts/pol
 
 Pod security policies are a mechanism to restrict what a container can do when run on kubernetes such as preventing running as privileged containers, running with host networking etc.
 
-Read the docs to see how this can be used to improve security
+Read the [docs](https://pmcgrath.net/using-pod-security-policies-with-kubeadm) to see how this can be used to improve security
 
 I struggled to find any information on bootstrapping a kubeadm cluster with the same, hence this content
 
 
 
+## TLDR
+This post is very long so I can do a full illustration, in short you need to
+- On master run kubeadm init with the PodSecurityPolicy admission controller enabled
+- Add some pod security policies with RBAC config - enough to allow CNI and DNS etc. to start
+	- CNI daemonsets will not start without this
+- Apply your CNI provider which can use one of the previously created pod security policies
+- Complete configuring the cluster adding nodes via kubeadm join
+- As you add more workloads to the cluster check if you need additional pod security policies and RBAC configuration for the same
+
+
+
 ## What we will do
 This is the list of steps I took to get pod security policies running on a kubeadm installation
-- Configure the pod security policy admission [controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podsecuritypolicy) on master init
+- Configure the pod security policy admission [controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#podsecuritypolicy) for master init
 - Configure some pod security policies for the control plane components
 - Configure a CNI provider - Will use flannel here
 
@@ -52,7 +63,7 @@ Verify kubeadm version
 sudo kubeadm version
 ```
 
-Create a directory somewhere for the content we will create below, all below assume you are in this directory
+Create a directory somewhere for the content we will create below, all below instructions assume you are in this directory
 ```
 mkdir ~/psp-inv
 cd ~/psp-inv
@@ -61,9 +72,11 @@ cd ~/psp-inv
 
 
 ## kubeadm config file
-Will create this file and use it for *kubeadm init* on the master
+Will create this file and use it for **kubeadm init** on the master
 
-Create a *kubeadm-config.yaml* file with this content - note we have to specify the podSubnet of 10.244.0.0/16 for flannel, note this file is minimal for this demo
+Create a **kubeadm-config.yaml** file with this content - note we have to specify the podSubnet of 10.244.0.0/16 for flannel
+
+Note this file is minimal for this demo and if you use a later version of kubeadm you may need to alter the apiVersion
 ```
 apiVersion: kubeadm.k8s.io/v1alpha2
 kind: MasterConfiguration
@@ -82,27 +95,22 @@ schedulerExtraArgs:
 
 ## Master init
 ```
-# Init the master node
 sudo kubeadm init --config kubeadm-config.yaml
 ```
 
 Follow the instructions from the above command output to get your own copy of the kubeconfig file
 
-If you want to add worker nodes to the cluster, note the join message, will be something like, if you want to add nodes to the cluster you use this
-
-```
-kubeadm join 10.170.48.11:6443 --token wqiofk.3hot80a1tz9zm1bf --discovery-token-ca-cert-hash sha256:7e568eb586a465f3ac083dab5959a4ae7c8715b35c3190ef18db8980b78abd18
-```
+If you want to add worker nodes to the cluster, note the join message
 
 Lets check the master node status with
 ```
 kubectl get nodes
 
 NAME                    STATUS     ROLES     AGE       VERSION
-pmcgrath-k8s-master     NotReady   master    1m        v1.11.2
+pmcgrath-k8s-master     NotReady   master    1m        v1.11.3
 ```
 
-So node is not ready as it is waiting for CNI
+So the node is not ready as it is waiting for CNI
 
 Lets check the pods
 ```
@@ -113,7 +121,7 @@ So none appear to be running, would normally see pods with some pending if we ha
 
 Lets check docker
 ```
-docker container ls --format '{{ .Names }}'
+docker container ls --format '\{\{ .Names \}\}'
 
 k8s_kube-scheduler_kube-scheduler-pmcgrath-k8s-master_kube-system_a00c35e56ebd0bdfcd77d53674a5d2a1_0
 k8s_kube-controller-manager_kube-controller-manager-pmcgrath-k8s-master_kube-system_fd832ada507cef85e01885d1e1980c37_0
@@ -147,7 +155,7 @@ I have went with configuring
 	- Will create an RBAC ClusterRole
 	- Will create an RBAC RoleBinding in the kube-system namespace
 
-Create a *default-psp-with-rbac.yaml* file with this content
+Create a **default-psp-with-rbac.yaml** file with this content
 ```
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
@@ -233,7 +241,7 @@ subjects:
   name: system:authenticated
 ```
 
-Create *privileged-psp-with-rbac.yaml* file with this content
+Create a **privileged-psp-with-rbac.yaml** file with this content
 ```
 # Should grant access to very few pods, i.e. kube-system system pods and possibly CNI pods
 apiVersion: policy/v1beta1
@@ -314,8 +322,8 @@ kubectl apply -f privileged-psp-with-rbac.yaml
 ```
 
 ### Check
-```
 Control plane pods will turn up in a running state after some time, coredns pods will be pending - waiting on CNI
+```
 kubectl get pods --all-namespaces --output wide --watch
 ```
 
@@ -324,7 +332,7 @@ Control plane pods will start failing again until CNI is configured, as the node
 ### Install flannel
 See [here](https://github.com/coreos/flannel)
 
-Will only be able to complete this as the *privileged* pod security policy will be exist and the flannel service account in the kube-system will be able to use
+Will only be able to complete this as the **privileged** pod security policy will now exist and the flannel service account in the kube-system will be able to use
 
 If using a different CNI provider you should use their installation instructions, will probably need to alter the podSubnet in the kubeadm-config.yaml file used for kubeadm init
 
@@ -343,10 +351,10 @@ All pods will eventually get to a running status including coredns pod(s)
 kubectl get nodes
 ```
 
-Node is ready
+Node is now ready
 
 ### Allow workloads on the master
-If you want to spin up worker nodes, you can do so as normal using the *kubeadm join* command using the output from kubeadm init, skipping this here
+If you want to spin up worker nodes, you can do so as normal using the **kubeadm join** command using the output from kubeadm init, skipping this here
 
 Nothing special needed on worker nodes joining the cluster pod security policy wise
 
@@ -372,7 +380,7 @@ kubectl create namespace ingress-nginx
 ### Lets create a pod security policy
 This pod security policy is based on the deployment [manifest](https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/mandatory.yaml)
 
-Create a file *nginx-ingress-psp-with-rbac.yaml* with this content
+Create a file **nginx-ingress-psp-with-rbac.yaml** with this content
 ```
 apiVersion: policy/v1beta1
 kind: PodSecurityPolicy
@@ -465,7 +473,7 @@ Lets apply
 kubectl apply -f nginx-ingress-psp-with-rbac.yaml
 ```
 
-### Create nginx-ingress
+### Create nginx-ingress workload
 - Will remove the controller --publish-service arg as we do not need here
 
 ```
@@ -487,7 +495,7 @@ kubectl get pods --namespace ingress-nginx --selector app.kubernetes.io/name=ing
 ## Httpbin.org workload
 Lets deploy a workload where the default pod security policy will suffice
 
-Create *httpbin.yaml* file with this content
+Create a **httpbin.yaml** file with this content
 ```
 apiVersion: apps/v1
 kind: Deployment
@@ -583,7 +591,7 @@ curl -H 'Host: my.httpbin.com' http://$nginx_ip/get
 If like me you mess this up regularly, you can reset and restart with
 
 ```
-# Note: Will loose PKI also which is fine here
+# Note: Will loose PKI also which is fine here as kubeadm master init will re-create
 sudo kubeadm reset
 
 # Should flush iptable rules after a kubeadm reset, see https://blog.heptio.com/properly-resetting-your-kubeadm-bootstrapped-cluster-nodes-heptioprotip-473bd0b824aa
